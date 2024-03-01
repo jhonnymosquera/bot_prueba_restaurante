@@ -7,7 +7,7 @@ const flowDomicilios = require('./menu_gotoFlow/flowDomicilios');
 
 const main = async () => {
 	const adapterDB = new MockAdapter();
-	const adapterFlow = createFlow([...flowDomicilios, flowArchivos]);
+	const adapterFlow = createFlow([...flowDomicilios]);
 	const adapterProvider = createProvider(BaileysProvider);
 
 	createBot({
