@@ -5,30 +5,25 @@ const capture = true;
 // Flujo 1
 const comidas = ['🍕 Pizza', '🍣 Sushi', '🍔 Hamburguesas'];
 
-const flowEnteroGotoFlow = addKeyword(['Hola', 'Domicilio', 'Menu'])
-	.addAction(async (_, { state }) => {
-		const inFlow = await state.get('inFlow');
-		if (inFlow) return;
-	})
-	.addAnswer(
-		mensajes.bienvenida,
-		{ capture },
+const flowEnteroGotoFlow = addKeyword(['Hola', 'Domicilio', 'Menu']).addAnswer(
+	mensajes.bienvenida,
+	{ capture },
 
-		async ({ body }, { state, gotoFlow, fallBack, flowDynamic }) => {
-			const opcion = Number(body);
-			const comida = comidas[opcion - 1];
-			await state.update({ comida });
-			await state.update({ inFlow: true });
+	async ({ body }, { state, gotoFlow, fallBack }) => {
+		const opcion = Number(body);
+		const comida = comidas[opcion - 1];
+		await state.update({ comida });
+		await state.update({ inFlow: true });
 
-			if (!comida) {
-				return fallBack();
-			} else {
-				if (opcion == 1) return gotoFlow(flowPizza);
-				if (opcion == 2) return gotoFlow(flowSushi);
-				if (opcion == 3) return gotoFlow(flowHamburguesa);
-			}
+		if (!comida) {
+			return fallBack();
+		} else {
+			if (opcion == 1) return gotoFlow(flowPizza);
+			if (opcion == 2) return gotoFlow(flowSushi);
+			if (opcion == 3) return gotoFlow(flowHamburguesa);
 		}
-	);
+	}
+);
 
 // Flujo 2
 const ingredientes = {
