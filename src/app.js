@@ -15,22 +15,13 @@ const probandoNegrita = addKeyword('negrita').addAnswer(
 );
 
 const main = async () => {
-	const adapterDB = new MockAdapter();
-	const adapterFlow = createFlow([...flowDomicilios]);
-	const adapterProvider = createProvider(BaileysProvider);
-
-	provider.initHttpServer(3002);
-	provider.http.server.get('/', async (req, res) => {
-		res.sendFile(path.join(process.cwd(), 'bot.qr.png'));
-	});
-
 	createBot({
-		flow: adapterFlow,
-		provider: adapterProvider,
-		database: adapterDB,
+		flow: createFlow([...flowDomicilios]),
+		provider: createProvider(BaileysProvider),
+		database: new MockAdapter(),
 	});
 
-	// QRPortalWeb();
+	QRPortalWeb();
 };
 
 main();
