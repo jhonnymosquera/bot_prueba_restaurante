@@ -2,7 +2,7 @@ const { createBot, createProvider, createFlow, addKeyword } = require('@bot-what
 
 const QRPortalWeb = require('@bot-whatsapp/portal');
 const BaileysProvider = require('@bot-whatsapp/provider/baileys');
-const MockAdapter = require('@bot-whatsapp/database/mock');
+const PostgreSQLAdapter = require('@bot-whatsapp/database/postgres');
 const flowDomicilios = require('./menu_gotoFlow/flowDomicilios');
 
 const probandoNegrita = addKeyword('negrita').addAnswer(
@@ -15,10 +15,18 @@ const probandoNegrita = addKeyword('negrita').addAnswer(
 );
 
 const main = async () => {
+	const database = new PostgreSQLAdapter({
+		host: 'viaduct.proxy.rlwy.net',
+		user: 'postgres',
+		database: 'bot_restaurante',
+		password: 'caBf*CDa64efeAd2163Ga4f65CAd3C3a',
+		port: 54636,
+	});
+
 	createBot({
 		flow: createFlow([...flowDomicilios]),
 		provider: createProvider(BaileysProvider),
-		database: new MockAdapter(),
+		database,
 	});
 
 	QRPortalWeb();
