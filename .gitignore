@@ -3,3 +3,5 @@ bot_sessions
 .vscode
 Dockerfile
 pnpm-lock.yaml
+bot.qr.png
+*.log

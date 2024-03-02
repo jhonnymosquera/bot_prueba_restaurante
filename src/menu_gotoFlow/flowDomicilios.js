@@ -1,5 +1,5 @@
 const { addKeyword } = require('@bot-whatsapp/bot');
-const { mensajes } = require('../menu/mensajes');
+const { mensajes } = require('./mensajes');
 const capture = true;
 
 // Flujo 1
@@ -124,7 +124,7 @@ const numero_telefono = async ({ body, from }, { state, flowDynamic, endFlow, fa
 	const { comida, tipoComida, telefono, direccion } = state.getMyState();
 
 	const message = `pedido: ${comida} ${tipoComida}\ntelefono: ${telefono}\ndireccion: ${direccion}`;
-
+	state.clear();
 	// provider.sendMessage('573004128586', message, {});
 
 	await flowDynamic(message);
