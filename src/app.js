@@ -3,10 +3,7 @@ const { createBot, createProvider, createFlow, addKeyword } = require('@bot-what
 const QRPortalWeb = require('@bot-whatsapp/portal');
 const BaileysProvider = require('@bot-whatsapp/provider/baileys');
 const PostgreSQLAdapter = require('@bot-whatsapp/database/postgres');
-const { JsonFileDB } = require('@bot-whatsapp/database/json');
 const flowDomicilios = require('./menu_gotoFlow/flowDomicilios');
-
-const test = addKeyword(test).addAnswer('Probando json');
 
 const main = async () => {
 	const database = new PostgreSQLAdapter({
