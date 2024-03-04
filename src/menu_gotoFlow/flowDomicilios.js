@@ -1,11 +1,11 @@
-const { addKeyword } = require('@bot-whatsapp/bot');
+const { addKeyword, EVENTS } = require('@bot-whatsapp/bot');
 const { mensajes } = require('./mensajes');
 const capture = true;
 
 // Flujo 1
 const comidas = ['🍕 Pizza', '🍣 Sushi', '🍔 Hamburguesas'];
 
-const flowEnteroGotoFlow = addKeyword(['Hola', 'Domicilio', 'Menu']).addAnswer(
+const flowEnteroGotoFlow = addKeyword(EVENTS.WELCOME).addAnswer(
 	mensajes.bienvenida,
 	{ capture },
 
