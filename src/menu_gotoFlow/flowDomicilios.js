@@ -10,6 +10,7 @@ const flowEnteroGotoFlow = addKeyword(['Hola', 'Domicilio', 'Menu']).addAnswer(
 	{ capture },
 
 	async ({ body }, { state, gotoFlow, fallBack }) => {
+		state.clear();
 		const opcion = Number(body);
 		const comida = comidas[opcion - 1];
 		await state.update({ comida });
@@ -27,7 +28,7 @@ const flowEnteroGotoFlow = addKeyword(['Hola', 'Domicilio', 'Menu']).addAnswer(
 
 // Flujo 2
 const ingredientes = {
-	pizza: ['🍅 Margherita', '🥓 Pepperoni', '🍆 Vegetariana'],
+	pizza: ['🍅 Tomate', '🥓 Pepperoni', '🍆 Vegetariana'],
 	sushi: ['🥢 California Roll', '🍣 Sashimi Variado', '🦐 Tempura Roll'],
 	hamburguesas: ['🍔 Clásica', '🥑 Vegetariana', '🧀 Doble Queso'],
 };

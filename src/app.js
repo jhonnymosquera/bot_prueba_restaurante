@@ -3,16 +3,10 @@ const { createBot, createProvider, createFlow, addKeyword } = require('@bot-what
 const QRPortalWeb = require('@bot-whatsapp/portal');
 const BaileysProvider = require('@bot-whatsapp/provider/baileys');
 const PostgreSQLAdapter = require('@bot-whatsapp/database/postgres');
+const { JsonFileDB } = require('@bot-whatsapp/database/json');
 const flowDomicilios = require('./menu_gotoFlow/flowDomicilios');
 
-const probandoNegrita = addKeyword('negrita').addAnswer(
-	['*Respuesta en negrita?*'],
-	null,
-
-	async (_, { provider }) => {
-		provider.sendMessage('573008825320', '*Se confirma el uso de negrita en el bot, NO RESPONDER ESTE MENSAJE*', {});
-	}
-);
+const test = addKeyword(test).addAnswer('Probando json');
 
 const main = async () => {
 	const database = new PostgreSQLAdapter({
