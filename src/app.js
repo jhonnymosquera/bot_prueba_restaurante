@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { createBot, createProvider, createFlow, addKeyword } = require('@bot-whatsapp/bot');
 
 const QRPortalWeb = require('@bot-whatsapp/portal');
@@ -7,11 +8,11 @@ const flowDomicilios = require('./menu_gotoFlow/flowDomicilios');
 
 const main = async () => {
 	const database = new PostgreSQLAdapter({
-		host: 'viaduct.proxy.rlwy.net',
-		user: 'postgres',
-		database: 'bot_restaurante',
-		password: 'caBf*CDa64efeAd2163Ga4f65CAd3C3a',
-		port: 54636,
+		host: process.env.POSTGRES_HOST,
+		user: process.env.POSTGRES_USER,
+		database: process.env.POSTGRES_DATABASE,
+		password: process.env.POSTGRES_PASSWORD,
+		port: process.env.POSTGRES_PORT,
 	});
 
 	createBot({

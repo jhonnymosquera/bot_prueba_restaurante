@@ -1,6 +1,6 @@
 node_modules
 bot_sessions
-.vscode
+.env
 Dockerfile
 pnpm-lock.yaml
 bot.qr.png
