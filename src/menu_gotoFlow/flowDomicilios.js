@@ -9,8 +9,6 @@ const flowEnteroGotoFlow = addKeyword(EVENTS.WELCOME)
 	.addAction(async (_, { globalState, endFlow }) => {
 		const botOnOf = globalState.get('botOnOf');
 
-		console.log(botOnOf);
-
 		if (!botOnOf) return endFlow();
 	})
 	.addAnswer(
@@ -59,12 +57,12 @@ const responseIngredientes = async ({ body }, { flowDynamic, state, gotoFlow, fa
 	}
 };
 
-const flowPizza = addKeyword(mensajes.randomString).addAnswer(mensajes.pizza, { capture }, responseIngredientes);
-const flowSushi = addKeyword(mensajes.randomString).addAnswer(mensajes.sushi, { capture }, responseIngredientes);
-const flowHamburguesa = addKeyword(mensajes.randomString).addAnswer(mensajes.hamburguesas, { capture }, responseIngredientes);
+const flowPizza = addKeyword(EVENTS.ACTION).addAnswer(mensajes.pizza, { capture }, responseIngredientes);
+const flowSushi = addKeyword(EVENTS.ACTION).addAnswer(mensajes.sushi, { capture }, responseIngredientes);
+const flowHamburguesa = addKeyword(EVENTS.ACTION).addAnswer(mensajes.hamburguesas, { capture }, responseIngredientes);
 
 // Flujo 3
-const flowConfirmarPedido = addKeyword(mensajes.randomString).addAnswer(
+const flowConfirmarPedido = addKeyword(EVENTS.ACTION).addAnswer(
 	mensajes.confirmar,
 	{ capture },
 
@@ -85,7 +83,7 @@ const flowConfirmarPedido = addKeyword(mensajes.randomString).addAnswer(
 );
 
 // Flujo 4
-const flowFormulario = addKeyword(mensajes.randomString).addAnswer(
+const flowFormulario = addKeyword(EVENTS.ACTION).addAnswer(
 	'¿En qué dirección te gustaría recibir tu pedido?',
 	{ capture },
 
@@ -97,7 +95,7 @@ const flowFormulario = addKeyword(mensajes.randomString).addAnswer(
 );
 
 // Flujo 5
-const flowConfirmarNumero = addKeyword(mensajes.randomString).addAnswer(
+const flowConfirmarNumero = addKeyword(EVENTS.ACTION).addAnswer(
 	[`¿Podemos llamarte a este mismo numero?\n`, '1 - Si', '2 - Otro'],
 	{ capture },
 
@@ -144,8 +142,8 @@ const numero_telefono = async ({ body, from }, { state, flowDynamic, endFlow, fa
 	return endFlow('Gracias por usar nuestro servicio de pedidos a domicilio. ¡Tu comida estará en camino pronto! 🚀🍽️');
 };
 
-const flowMismoNumero = addKeyword(mensajes.randomString).addAnswer('Resumen:', null, numero_telefono);
-const otro_numero = addKeyword(mensajes.randomString).addAnswer('Ingresa un numero de telefono', { capture }, numero_telefono);
+const flowMismoNumero = addKeyword(EVENTS.ACTION).addAnswer('Resumen:', null, numero_telefono);
+const otro_numero = addKeyword(EVENTS.ACTION).addAnswer('Ingresa un numero de telefono', { capture }, numero_telefono);
 
 const flowDomicilios = [
 	flowEnteroGotoFlow,

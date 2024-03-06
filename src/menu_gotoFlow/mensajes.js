@@ -1,7 +1,4 @@
-const { v4: uuidv4 } = require('uuid');
-
 const mensajes = {
-	randomString: uuidv4(),
 	bienvenida: [
 		'Bienvenido al Servicio de Pedidos a Domicilio! 🍔🛵\n',
 		'Por favor, seleccione una opción: \n',
