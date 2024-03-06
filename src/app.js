@@ -5,6 +5,7 @@ const QRPortalWeb = require('@bot-whatsapp/portal');
 const BaileysProvider = require('@bot-whatsapp/provider/baileys');
 const PostgreSQLAdapter = require('@bot-whatsapp/database/postgres');
 const flowDomicilios = require('./menu_gotoFlow/flowDomicilios');
+const { flowsAdmin } = require('./admin/01_admin.flow');
 
 const main = async () => {
 	const database = new PostgreSQLAdapter({
@@ -16,7 +17,7 @@ const main = async () => {
 	});
 
 	createBot({
-		flow: createFlow([...flowDomicilios]),
+		flow: createFlow([...flowsAdmin, ...flowDomicilios]),
 		provider: createProvider(BaileysProvider),
 		database,
 	});

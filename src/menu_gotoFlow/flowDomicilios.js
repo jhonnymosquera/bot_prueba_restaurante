@@ -5,26 +5,34 @@ const capture = true;
 // Flujo 1
 const comidas = ['🍕 Pizza', '🍣 Sushi', '🍔 Hamburguesas'];
 
-const flowEnteroGotoFlow = addKeyword(EVENTS.WELCOME).addAnswer(
-	mensajes.bienvenida,
-	{ capture },
+const flowEnteroGotoFlow = addKeyword(EVENTS.WELCOME)
+	.addAction(async (_, { globalState, endFlow }) => {
+		const botOnOf = globalState.get('botOnOf');
 
-	async ({ body }, { state, gotoFlow, fallBack }) => {
-		state.clear();
-		const opcion = Number(body);
-		const comida = comidas[opcion - 1];
-		await state.update({ comida });
-		await state.update({ inFlow: true });
+		console.log(botOnOf);
 
-		if (!comida) {
-			return fallBack();
-		} else {
-			if (opcion == 1) return gotoFlow(flowPizza);
-			if (opcion == 2) return gotoFlow(flowSushi);
-			if (opcion == 3) return gotoFlow(flowHamburguesa);
+		if (!botOnOf) return endFlow();
+	})
+	.addAnswer(
+		mensajes.bienvenida,
+		{ capture },
+
+		async ({ body }, { state, gotoFlow, fallBack }) => {
+			state.clear();
+			const opcion = Number(body);
+			const comida = comidas[opcion - 1];
+			await state.update({ comida });
+			await state.update({ inFlow: true });
+
+			if (!comida) {
+				return fallBack();
+			} else {
+				if (opcion == 1) return gotoFlow(flowPizza);
+				if (opcion == 2) return gotoFlow(flowSushi);
+				if (opcion == 3) return gotoFlow(flowHamburguesa);
+			}
 		}
-	}
-);
+	);
 
 // Flujo 2
 const ingredientes = {
@@ -109,8 +117,9 @@ const flowConfirmarNumero = addKeyword(mensajes.randomString).addAnswer(
 );
 
 // Flujo Final - Numero de telefono
-const numero_telefono = async ({ body, from }, { state, flowDynamic, endFlow, fallBack, provider }) => {
+const numero_telefono = async ({ body, from }, { state, flowDynamic, endFlow, fallBack, provider, globalState }) => {
 	await state.update({ inFlow: false });
+
 	if (body == '1') {
 		await state.update({ telefono: from.slice(2) });
 	} else {
@@ -123,10 +132,12 @@ const numero_telefono = async ({ body, from }, { state, flowDynamic, endFlow, fa
 		await flowDynamic('Resumen:');
 	}
 	const { comida, tipoComida, telefono, direccion } = state.getMyState();
+	const numeroEmpleado = globalState.get('numeroEmpleado');
 
 	const message = `pedido: ${comida} ${tipoComida}\ntelefono: ${telefono}\ndireccion: ${direccion}`;
 	state.clear();
-	// provider.sendMessage('573004128586', message, {});
+
+	provider.sendMessage(`57${numeroEmpleado}`, message, {});
 
 	await flowDynamic(message);
 
