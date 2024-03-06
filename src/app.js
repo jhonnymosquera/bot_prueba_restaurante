@@ -1,5 +1,18 @@
 require('dotenv').config();
-const { createBot, createProvider, createFlow, addKeyword } = require('@bot-whatsapp/bot');
+const { createBot, createProvider, createFlow } = require('@bot-whatsapp/bot');
+const express = require('express');
+const path = require('path');
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, async () => {
+	console.log(`Servidor corriendo en el puerto ${PORT}`);
+});
+
+app.get('/', async (req, res) => {
+	res.sendFile(path.join(process.cwd(), 'bot.qr.png'));
+});
 
 const QRPortalWeb = require('@bot-whatsapp/portal');
 const BaileysProvider = require('@bot-whatsapp/provider/baileys');
@@ -22,7 +35,7 @@ const main = async () => {
 		database,
 	});
 
-	QRPortalWeb();
+	// QRPortalWeb();
 };
 
 main();

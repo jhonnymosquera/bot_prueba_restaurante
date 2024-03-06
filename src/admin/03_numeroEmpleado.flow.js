@@ -15,7 +15,7 @@ const flowNumeroEmpleado = addKeyword(EVENTS.ACTION).addAnswer(
 		}
 
 		await globalState.update({ numeroEmpleado });
-		await endFlow(`📲 El numero de empleado cambiado correctamente`);
+		return endFlow(`📲 El numero de empleado cambiado correctamente`);
 	}
 );
 
