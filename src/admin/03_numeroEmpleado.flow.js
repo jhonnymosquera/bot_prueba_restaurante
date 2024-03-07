@@ -1,12 +1,10 @@
 const { addKeyword, EVENTS } = require('@bot-whatsapp/bot');
 
-const capture = true;
-
 const flowNumeroEmpleado = addKeyword(EVENTS.ACTION).addAnswer(
 	'Ingrese el nuevo numero',
-	{ capture },
+	{ capture: true },
 
-	async ({ body }, { globalState, flowDynamic, fallBack, endFlow }) => {
+	async ({ body }, { globalState, flowDynamic, fallBack, gotoFlow }) => {
 		const numeroEmpleado = body;
 
 		if (body.length < 10 || body[0] != '3') {
@@ -15,7 +13,9 @@ const flowNumeroEmpleado = addKeyword(EVENTS.ACTION).addAnswer(
 		}
 
 		await globalState.update({ numeroEmpleado });
-		return endFlow(`📲 El numero de empleado cambiado correctamente`);
+		await flowDynamic(`📲 El numero de empleado cambiado correctamente`);
+
+		return gotoFlow(require('./01_admin.flow').flowsAdmin[0]);
 	}
 );
 

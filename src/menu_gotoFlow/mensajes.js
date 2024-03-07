@@ -19,11 +19,7 @@ const mensajes = {
 		'2 - 🥑 Vegetariana',
 		'3 - 🧀 Doble Queso',
 	],
-	confirmar: [
-		'Para confirmar tu pedido, por favor, selecciona la opción "Confirmar Pedido" cuando estés listo.\n',
-		'1 - ✅ Confirmar Pedido',
-		'2 - ❌ Cancelar',
-	],
+	confirmar: ['¿Este es tu pedido?\n', '1 - ✅ Confirmar', '2 - ❌ Cancelar'],
 };
 
 module.exports = { mensajes };
