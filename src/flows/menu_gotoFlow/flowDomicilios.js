@@ -135,7 +135,7 @@ const numero_telefono = async ({ body, from }, { state, flowDynamic, endFlow, fa
 	const message = `pedido: ${comida} ${tipoComida}\ntelefono: ${telefono}\ndireccion: ${direccion}`;
 	state.clear();
 
-	provider.sendMessage(`57${numeroEmpleado}`, message, {});
+	provider.sendMessage(`57${numeroEmpleado ? numeroEmpleado : process.env.DEFAULT_NUMBER}`, message, {});
 
 	await flowDynamic(message);
 

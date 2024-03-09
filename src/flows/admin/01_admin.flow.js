@@ -5,7 +5,7 @@ const { flowNumeroEmpleado } = require('./03_numeroEmpleado.flow');
 const capture = true;
 const idle = 10000; // 10 segundos
 
-const flowAdmin = addKeyword('modo-admin').addAnswer(
+const flowAdmin = addKeyword(process.env.MODO_ADMIN).addAnswer(
 	['⚙️ ¿Que quieres hacer? 🛠️\n', '1 - 🤖 Activar o Desactivar bot', '2 - 📱 Cambiar Numero de Empleado ', '3 - ➡️ Salir '],
 	{ capture, idle },
 
